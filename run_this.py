@@ -1,8 +1,9 @@
-from maze_env import Maze
+
+from stock_env import StockTradeAgent
 from RL_brain import DeepQNetwork
 
 
-def run_maze():
+def run():
     step = 0
     for episode in range(300):
         # initial observation
@@ -10,7 +11,7 @@ def run_maze():
 
         while True:
             # fresh env
-            env.render()
+            # env.render()
 
             # RL choose action based on observation
             action = RL.choose_action(observation)
@@ -33,12 +34,12 @@ def run_maze():
 
     # end of game
     print('game over')
-    env.destroy()
+    # env.destroy()
 
 
 if __name__ == "__main__":
     # maze game
-    env = Maze()
+    env = StockTradeAgent()
     RL = DeepQNetwork(env.n_actions, env.n_features,
                       learning_rate=0.01,
                       reward_decay=0.9,
@@ -47,6 +48,6 @@ if __name__ == "__main__":
                       memory_size=2000,
                       # output_graph=True
                       )
-    env.after(100, run_maze)
-    env.mainloop()
+
+    run()
     RL.plot_cost()
